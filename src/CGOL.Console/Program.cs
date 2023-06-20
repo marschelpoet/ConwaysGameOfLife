@@ -3,16 +3,34 @@ using CGOL.Console.Services;
 
 using IHost host = CreateHostBuilder(args).Build();
 
-host.StartAsync();
+try
+{
+    await host.StartAsync();
 
-Thread.Sleep(1500);
+    Thread.Sleep(1500);
 
-host.StopAsync();
+    await host.StopAsync();
+}
+catch (Exception ex)
+{
+    HandleCrash(ex);
+}
 
-static IHostBuilder CreateHostBuilder(string[] args) =>
+IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder().ConfigureServices(services =>
         services.AddLaunchOptions(args)
             .AddHostedService<GameLoop>());
+
+void HandleCrash(Exception ex)
+{
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.WriteLine("An unexpected error has occurred!");
+    Console.WriteLine("---");
+    Console.WriteLine(ex.Message);
+    Console.WriteLine(Environment.NewLine);
+    Console.WriteLine(ex.StackTrace);
+    Console.ResetColor();
+}
 
 /*
 Console.CursorVisible = false;

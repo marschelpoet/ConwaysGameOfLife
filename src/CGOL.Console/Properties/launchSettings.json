@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Game Of Life": {
+      "commandName": "Project"
+    },
+    "Game Of Life - Large Field": {
+      "commandName": "Project",
+      "commandLineArgs": "-w 500 -h 500"
+    },
+    "Game Of Life - Small Field": {
+      "commandName": "Project",
+      "commandLineArgs": "-w 120 -h 30"
+    }
+  }
+}
