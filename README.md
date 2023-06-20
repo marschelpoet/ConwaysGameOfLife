@@ -6,7 +6,7 @@ An overengineered C# implementation of Conways Game of Life.
 ## TODO List
 
 - [ ] 1. Console
-- [ ] 1.0.5 Host setup
+- [x] 1.0.5 Host setup
 - [ ] 1.1 Fixed size window
 - [ ] 1.2 run game loop
 - [ ] 1.3 manage user input
