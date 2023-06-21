@@ -4,30 +4,34 @@ namespace CGOL.Console.Services;
 
 public class GameLoop : IHostedService
 {
+    private readonly IOptionsValidator _optionsValidator;
     private readonly Task _completedTask = Task.CompletedTask;
     private readonly LaunchOptions _launchOptions;
 
-    public GameLoop(IOptionsSnapshot<LaunchOptions> launchOptions)
+    public GameLoop(IOptionsSnapshot<LaunchOptions> launchOptions, IOptionsValidator optionsValidator)
     {
+        _optionsValidator = optionsValidator;
         _launchOptions = launchOptions.Value;
     }
 
-    private void InitializeGame()
+    private void InitializeConsole()
     {
-        System.Console.WriteLine("INIT");
-        System.Console.WriteLine(_launchOptions);
+        _optionsValidator.ValidateOptionsThrow(_launchOptions);
+
         System.Console.CursorVisible = false;
         System.Console.Title = "Conways Game of Life";
+        // TODO: Check for system agnostic solution
 #pragma warning disable CA1416 // This call is not reachable on all platforms. Windows only
-        System.Console.BufferHeight = _launchOptions.FieldHeight;
-        System.Console.BufferWidth = _launchOptions.FieldWidth;
+        System.Console.SetWindowSize(_launchOptions.Width, _launchOptions.Height);
+        System.Console.BufferHeight = _launchOptions.Height;
+        System.Console.BufferWidth = _launchOptions.Width;
 #pragma warning restore CA1416
     }
 
     /// <inheritdoc />
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        InitializeGame();
+        InitializeConsole();
         return _completedTask;
     }
 

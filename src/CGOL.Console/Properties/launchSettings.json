@@ -10,6 +10,18 @@
     "Game Of Life - Small Field": {
       "commandName": "Project",
       "commandLineArgs": "-w 120 -h 30"
+    },
+    "Game Of Life - Invalid Field Height": {
+      "commandName": "Project",
+      "commandLineArgs": "-w 120 -h 29"
+    },
+    "Game Of Life - Invalid Field Width": {
+      "commandName": "Project",
+      "commandLineArgs": "-w 119 -h 30"
+    },
+    "Game Of Life - Invalid Field": {
+      "commandName": "Project",
+      "commandLineArgs": "-w 119 -h 29"
     }
   }
 }

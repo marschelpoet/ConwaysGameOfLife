@@ -1,6 +1,8 @@
 ﻿using CGOL.Console.Extensions;
 using CGOL.Console.Services;
 
+using System.ComponentModel.DataAnnotations;
+
 using IHost host = CreateHostBuilder(args).Build();
 
 try
@@ -11,25 +13,40 @@ try
 
     await host.StopAsync();
 }
-catch (Exception ex)
+catch (OptionValidationFailedException ex)
 {
-    HandleCrash(ex);
+    Console.ForegroundColor = ConsoleColor.DarkRed;
+    Console.WriteLine(ex.Message);
+    Console.WriteLine("Validation Results: {0}", Environment.NewLine);
+
+    foreach (ValidationResult validationResult in ex.ValidationResults)
+    {
+        Console.WriteLine(validationResult.ErrorMessage);
+    }
+
+    Console.ResetColor();
 }
-
-IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder().ConfigureServices(services =>
-        services.AddLaunchOptions(args)
-            .AddHostedService<GameLoop>());
-
-void HandleCrash(Exception ex)
+catch (Exception ex)
 {
     Console.ForegroundColor = ConsoleColor.DarkRed;
     Console.WriteLine("An unexpected error has occurred!");
     Console.WriteLine("---");
     Console.WriteLine(ex.Message);
+    Console.WriteLine(ex.GetType());
     Console.WriteLine(Environment.NewLine);
     Console.WriteLine(ex.StackTrace);
     Console.ResetColor();
+}
+
+IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder().ConfigureServices(services => services
+        .AddLaunchOptions(args)
+        .AddScoped<IOptionsValidator, OptionsValidator>()
+        .AddHostedService<GameLoop>());
+
+void HandleCrash(Exception ex)
+{
+
 }
 
 /*
