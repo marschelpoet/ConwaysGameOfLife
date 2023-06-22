@@ -9,7 +9,8 @@ public class ConsoleHeightAttribute : ValidationAttribute
     private new const string ErrorMessage = "The field {0} must be between {1} and {2}.";
 
     private readonly int _minimumHeight;
-    private readonly int _maxHeight = System.Console.LargestWindowHeight;
+    // Reduce available height to User to have space for the menu print
+    private readonly int _maxHeight = System.Console.LargestWindowHeight - 1;
 
     public ConsoleHeightAttribute(int minimumHeight)
     {

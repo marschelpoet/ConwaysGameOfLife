@@ -8,69 +8,49 @@ using IHost host = CreateHostBuilder(args).Build();
 try
 {
     await host.StartAsync();
-
-    Thread.Sleep(1500);
-
-    await host.StopAsync();
 }
 catch (OptionValidationFailedException ex)
 {
-    Console.ForegroundColor = ConsoleColor.DarkRed;
-    Console.WriteLine(ex.Message);
-    Console.WriteLine("Validation Results: {0}", Environment.NewLine);
-
-    foreach (ValidationResult validationResult in ex.ValidationResults)
+    WriteError(ex, exc =>
     {
-        Console.WriteLine(validationResult.ErrorMessage);
-    }
+        Console.WriteLine(exc.Message);
+        Console.WriteLine("Validation Results: {0}", Environment.NewLine);
 
-    Console.ResetColor();
+        foreach (ValidationResult validationResult in exc.ValidationResults)
+        {
+            Console.WriteLine(validationResult.ErrorMessage);
+        }
+    });
 }
 catch (Exception ex)
 {
-    Console.ForegroundColor = ConsoleColor.DarkRed;
-    Console.WriteLine("An unexpected error has occurred!");
-    Console.WriteLine("---");
-    Console.WriteLine(ex.Message);
-    Console.WriteLine(ex.GetType());
-    Console.WriteLine(Environment.NewLine);
-    Console.WriteLine(ex.StackTrace);
-    Console.ResetColor();
+    WriteError(ex, exc =>
+    {
+        Console.WriteLine("An unexpected error has occurred!");
+        Console.WriteLine("---");
+        Console.WriteLine(exc.Message);
+        Console.WriteLine(exc.GetType());
+        Console.WriteLine(Environment.NewLine);
+        Console.WriteLine(exc.StackTrace);
+    });
+}
+finally
+{
+    await host.StopAsync();
 }
 
 IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder().ConfigureServices(services => services
         .AddLaunchOptions(args)
-        .AddScoped<IOptionsValidator, OptionsValidator>()
+        .AddScoped<IUserInteractionService<ConsoleKey>, ConsoleUserInteractionService>()
+        .AddScoped<IOptionsValidator, DefaultOptionsValidator>()
         .AddHostedService<GameLoop>());
 
-void HandleCrash(Exception ex)
+void WriteError<T>(T exception, Action<T> writeAction) where T : Exception
 {
+    Console.ForegroundColor = ConsoleColor.DarkRed;
 
+    writeAction(exception);
+
+    Console.ResetColor();
 }
-
-/*
-Console.CursorVisible = false;
-
-int counter = 0;
-do
-{
-    Console.WriteLine("Iteration {0}", counter);
-
-    if (Console.KeyAvailable)
-    {
-        ConsoleKeyInfo key = Console.ReadKey(true);
-        Console.WriteLine("Key press detected: {0}", key.Key);
-
-        if (key.Key == ConsoleKey.X)
-        {
-            break;
-        }
-    }
-
-    counter = counter == int.MaxValue - 1 ? 0 : counter + 1;
-    Thread.Sleep(500);
-} while (counter < int.MaxValue);
-
-Console.ReadLine();
-*/

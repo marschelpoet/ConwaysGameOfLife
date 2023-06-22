@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CGOL.Console.Services;
+namespace CGOL.Console.Services.Interfaces;
 
 public interface IOptionsValidator
 {

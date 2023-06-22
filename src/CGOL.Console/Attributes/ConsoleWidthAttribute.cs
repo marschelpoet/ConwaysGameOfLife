@@ -3,17 +3,12 @@ using System.Globalization;
 
 namespace CGOL.Console.Attributes;
 
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
 public class ConsoleWidthAttribute : ValidationAttribute
 {
     private new const string ErrorMessage = "The field {0} must be between {1} and {2}.";
     private readonly int _minimumWidth;
     private readonly int _maxWidth = System.Console.LargestWindowWidth;
-
-    public ConsoleWidthAttribute()
-    {
-
-    }
 
     public ConsoleWidthAttribute(int minimumWidth)
     {
