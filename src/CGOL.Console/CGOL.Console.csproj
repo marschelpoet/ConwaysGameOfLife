@@ -15,7 +15,10 @@
   <ItemGroup>
     <Folder Include="Configuration\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CGOL.Lib\CGOL.Lib.csproj" />
   </ItemGroup>
 
 </Project>

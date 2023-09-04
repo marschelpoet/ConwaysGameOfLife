@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CGOL.Console.Constants;
+
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
 namespace CGOL.Console.Attributes;
@@ -10,7 +12,7 @@ public class ConsoleHeightAttribute : ValidationAttribute
 
     private readonly int _minimumHeight;
     // Reduce available height to User to have space for the menu print
-    private readonly int _maxHeight = System.Console.LargestWindowHeight - 1;
+    private readonly int _maxHeight = System.Console.LargestWindowHeight - ConsoleConstants.NumberOfReservedBufferRows;
 
     public ConsoleHeightAttribute(int minimumHeight)
     {

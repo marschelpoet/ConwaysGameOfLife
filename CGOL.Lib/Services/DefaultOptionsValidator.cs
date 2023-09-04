@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CGOL.Lib.Exceptions;
 
-namespace CGOL.Console.Services.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
-public interface IOptionsValidator
+namespace CGOL.Lib.Services;
+
+public class DefaultOptionsValidator<TOptions> : IOptionsValidator<TOptions> where TOptions : notnull
 {
-    void ValidateOptionsThrow(LaunchOptions options)
+    public void ValidateOptionsThrow(TOptions options)
     {
         List<ValidationResult> results = new();
         ValidationContext context = new(options);

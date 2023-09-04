@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGOL.Console", "src\CGOL.Console\CGOL.Console.csproj", "{FC86D9EF-2168-4B71-A05F-5BF52B5BA7A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CGOL.Console", "src\CGOL.Console\CGOL.Console.csproj", "{FC86D9EF-2168-4B71-A05F-5BF52B5BA7A7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{04E0A916-28EC-4A6A-8C19-83A924830585}"
 EndProject
@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solutionItems", "_solution
 		.gitignore = .gitignore
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGOL.Lib", "CGOL.Lib\CGOL.Lib.csproj", "{FA4E09A6-A99F-4E67-B4C0-AAF79E587E78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +25,17 @@ Global
 		{FC86D9EF-2168-4B71-A05F-5BF52B5BA7A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC86D9EF-2168-4B71-A05F-5BF52B5BA7A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC86D9EF-2168-4B71-A05F-5BF52B5BA7A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA4E09A6-A99F-4E67-B4C0-AAF79E587E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA4E09A6-A99F-4E67-B4C0-AAF79E587E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA4E09A6-A99F-4E67-B4C0-AAF79E587E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA4E09A6-A99F-4E67-B4C0-AAF79E587E78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FC86D9EF-2168-4B71-A05F-5BF52B5BA7A7} = {04E0A916-28EC-4A6A-8C19-83A924830585}
+		{FA4E09A6-A99F-4E67-B4C0-AAF79E587E78} = {04E0A916-28EC-4A6A-8C19-83A924830585}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {713C8593-616C-42D6-B814-FE2EF6EEAA17}

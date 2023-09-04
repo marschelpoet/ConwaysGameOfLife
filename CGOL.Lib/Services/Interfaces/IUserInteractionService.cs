@@ -1,6 +1,4 @@
-﻿using CGOL.Console.Models;
-
-namespace CGOL.Console.Services.Interfaces;
+﻿namespace CGOL.Lib.Services.Interfaces;
 
 public interface IUserInteractionService<TInteractionTrigger>
 {
@@ -8,7 +6,9 @@ public interface IUserInteractionService<TInteractionTrigger>
 
     IEnumerable<KeyValuePair<TInteractionTrigger, string>> GetAvailableInteractions();
 
-    bool IsInteractionAvailable(out TInteractionTrigger? availableTrigger);
+    IEnumerable<string> GetAvailableInteractionsAsStrings();
+
+    bool IsInteractionAvailable(out TInteractionTrigger availableTrigger);
 
     void RespondToInteraction(TInteractionTrigger trigger);
 }

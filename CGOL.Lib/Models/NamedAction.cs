@@ -1,4 +1,4 @@
-﻿namespace CGOL.Console.Models;
+﻿namespace CGOL.Lib.Models;
 
 public class NamedAction
 {
@@ -11,4 +11,7 @@ public class NamedAction
     ///		A descriptive name for the action.
     /// </summary>
     public string Name { get; init; } = null!;
+
+    /// <inheritdoc />
+    public override string ToString() => Name;
 }

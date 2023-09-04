@@ -1,5 +1,5 @@
-﻿using CGOL.Console.Extensions;
-using CGOL.Console.Services;
+﻿using CGOL.Console.Services;
+using CGOL.Lib.Exceptions;
 
 using System.ComponentModel.DataAnnotations;
 
@@ -33,18 +33,16 @@ catch (Exception ex)
         Console.WriteLine(Environment.NewLine);
         Console.WriteLine(exc.StackTrace);
     });
-}
-finally
-{
+
     await host.StopAsync();
 }
 
 IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder().ConfigureServices(services => services
-        .AddLaunchOptions(args)
-        .AddScoped<IUserInteractionService<ConsoleKey>, ConsoleUserInteractionService>()
-        .AddScoped<IOptionsValidator, DefaultOptionsValidator>()
-        .AddHostedService<GameLoop>());
+        .AddParsedArguments(args)
+        .AddConwaysGameOfLife()
+        .AddConsoleImplementations()
+        .AddHostedService<ConsoleGame>());
 
 void WriteError<T>(T exception, Action<T> writeAction) where T : Exception
 {

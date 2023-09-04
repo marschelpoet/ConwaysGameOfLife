@@ -1,4 +1,5 @@
-﻿using CGOL.Console.Models;
+﻿using CGOL.Lib.Models;
+using CGOL.Lib.Services.Interfaces;
 
 namespace CGOL.Console.Services;
 
@@ -8,10 +9,7 @@ public class ConsoleUserInteractionService : IUserInteractionService<ConsoleKey>
 
     public ConsoleUserInteractionService()
     {
-        _availableInteractions = new Dictionary<ConsoleKey, NamedAction>
-        {
-            { ConsoleKey.F24, new NamedAction { Action = () => {}, Name = "Default Empty Action"} }
-        };
+        _availableInteractions = new Dictionary<ConsoleKey, NamedAction>();
     }
 
     /// <inheritdoc />
@@ -24,6 +22,12 @@ public class ConsoleUserInteractionService : IUserInteractionService<ConsoleKey>
     public IEnumerable<KeyValuePair<ConsoleKey, string>> GetAvailableInteractions()
     {
         return _availableInteractions.Keys.Select(key => new KeyValuePair<ConsoleKey, string>(key, _availableInteractions[key].Name)).ToList();
+    }
+
+    /// <inheritdoc />
+    public IEnumerable<string> GetAvailableInteractionsAsStrings()
+    {
+        return _availableInteractions.Select(interaction => $"{interaction.Key} - {interaction.Value.Name}");
     }
 
     /// <inheritdoc />
@@ -40,6 +44,8 @@ public class ConsoleUserInteractionService : IUserInteractionService<ConsoleKey>
     }
 
     /// <inheritdoc />
+    // ReSharper disable once FlagArgument
+    // The enum is in fact not used as a flag here
     public void RespondToInteraction(ConsoleKey trigger)
     {
         if (_availableInteractions.TryGetValue(trigger, out NamedAction? namedAction))

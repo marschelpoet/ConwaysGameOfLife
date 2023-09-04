@@ -1,7 +1,8 @@
 {
   "profiles": {
     "Game Of Life": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "--w 150 --h 40 --speed 200"
     },
     "Game Of Life - Large Field": {
       "commandName": "Project",
